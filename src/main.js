@@ -35,9 +35,10 @@ directionalLight.position.set(1, 1, 1);
 directionalLight.castShadow = true;
 scene.add(directionalLight);
 
-// 効果音の設定
-const pageFlipSound = new Audio('sounds/page-flip.mp3');
-pageFlipSound.volume = 0.6; // 音量調整 (0.0～1.0)
+// 効果音の設定 - パスを絶対パスに修正
+const pageFlipSound = new Audio('./sounds/page-flip.mp3');
+pageFlipSound.volume = 0.8; // 音量を上げる
+let soundEnabled = true; // 音声の有効/無効を管理するフラグ
 
 // 背景の設定 - 部屋のような環境を作成
 const roomGeometry = new THREE.BoxGeometry(20, 15, 20);
@@ -65,13 +66,6 @@ const book = new FlipBook({
     flipDuration: 0.8, // ページめくりの時間（秒）
     yBetweenPages: 0.001, // ページ間のスペース
     pageSubdivisions: 20 // ページの分割数（滑らかさに影響）
-});
-
-// ページめくり効果音のためのイベントリスナーを追加
-book.addEventListener('flipstart', () => {
-    // 音声を再生（既に再生中の場合はリセット）
-    pageFlipSound.currentTime = 0;
-    pageFlipSound.play().catch(e => console.log('音声再生エラー:', e));
 });
 
 // 絵本のスケール調整（縦横比を調整）
@@ -427,21 +421,68 @@ function analyzeText(text) {
 // 効果音のプリロード
 function preloadSounds() {
     return new Promise((resolve) => {
+        // 初回のユーザーインタラクションに備えて効果音を準備
+        document.body.addEventListener('click', function initAudio() {
+            // ダミー再生を行ってユーザーインタラクションを確立
+            pageFlipSound.play().then(() => {
+                pageFlipSound.pause();
+                pageFlipSound.currentTime = 0;
+                console.log('効果音の初期化が完了しました');
+            }).catch(e => {
+                console.warn('効果音の初期化に失敗しました:', e);
+            });
+            document.body.removeEventListener('click', initAudio);
+        }, {once: true});
+        
         // 効果音が読み込まれたら準備完了
         pageFlipSound.addEventListener('canplaythrough', function onCanPlay() {
             pageFlipSound.removeEventListener('canplaythrough', onCanPlay);
+            console.log('効果音の読み込みが完了しました');
             resolve();
         });
         
         // すでに読み込まれている場合や、エラーの場合も処理を進める
-        pageFlipSound.addEventListener('error', function() {
-            console.warn('効果音の読み込みに失敗しました');
+        pageFlipSound.addEventListener('error', function(e) {
+            console.warn('効果音の読み込みに失敗しました:', e);
             resolve();
         });
         
         // 効果音ファイルのプリロード
         pageFlipSound.load();
     });
+}
+
+// 音声トグルボタンの作成
+function createSoundToggleButton() {
+    const soundButton = document.createElement('button');
+    soundButton.id = 'soundToggle';
+    soundButton.innerHTML = '🔊'; // 音量アイコン
+    
+    // スタイル設定
+    soundButton.style.position = 'fixed';
+    soundButton.style.top = '20px';
+    soundButton.style.right = '20px';
+    soundButton.style.padding = '10px';
+    soundButton.style.borderRadius = '50%';
+    soundButton.style.background = 'rgba(255, 255, 255, 0.7)';
+    soundButton.style.border = '1px solid #ccc';
+    soundButton.style.fontSize = '20px';
+    soundButton.style.cursor = 'pointer';
+    soundButton.style.zIndex = '100';
+    soundButton.style.width = '50px';
+    soundButton.style.height = '50px';
+    
+    // クリックイベント
+    soundButton.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        soundButton.innerHTML = soundEnabled ? '🔊' : '🔇';
+        if (soundEnabled) {
+            // 音声有効時にテスト再生
+            playPageFlipSound();
+        }
+    });
+    
+    document.body.appendChild(soundButton);
 }
 
 // ボタンとイベントリスナーのセットアップ
@@ -470,12 +511,18 @@ function setupButtons() {
         } else {
             book.flipRight();
         }
-        // 効果音を再生（すでにflipstartイベントで再生されるためここでは不要）
+        // 効果音を再生
+        playPageFlipSound();
     });
+    
+    // 音声トグルボタンの作成
+    createSoundToggleButton();
 }
 
 // 効果音を再生する関数
 function playPageFlipSound() {
+    if (!soundEnabled) return;
+    
     // 効果音が再生中の場合はリセット
     pageFlipSound.currentTime = 0;
     // 効果音を再生
@@ -559,16 +606,24 @@ function animate() {
 
 // 初期化時に実行する関数
 async function init() {
+    console.log('初期化を開始します');
+    
     // 効果音のプリロード
     await preloadSounds();
+    
     // ページの読み込み
     await loadPages();
+    
     // ボタンのセットアップ
     setupButtons();
+    
     // イベントリスナーの追加
     window.addEventListener('resize', onWindowResize, false);
+    
     // アニメーションの開始
     animate();
+    
+    console.log('初期化が完了しました');
 }
 
 init();
