@@ -97,7 +97,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                 const textParts2 = analyzeText('いい思い出になったおばけやしき。');
                 
                 // テキスト位置計算のための準備
-                ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                 
                 // 全体のテキスト幅を計算（文字間隔を含む）- 1行目
                 let totalWidth1 = 0;
@@ -127,7 +127,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                     
                     // 本文テキストを描画
                     ctx.fillStyle = '#000000';
-                    ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                    ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                     ctx.fillText(part.text, currentX1, textY - 30); // 1行目位置を下に調整
                     
                     // 読み仮名（ルビ）を描画 - 漢字の真上に配置
@@ -135,7 +135,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                         // 正確な中央位置
                         const charCenterX = currentX1 + width/2;
                         
-                        ctx.font = '15px "Hiragino Sans", "Meiryo", sans-serif';
+                        ctx.font = '15px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                         const rubyWidth = ctx.measureText(part.ruby).width;
                         
                         // ルビを漢字の真上、中央揃えで配置
@@ -158,7 +158,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                     
                     // 本文テキストを描画
                     ctx.fillStyle = '#000000';
-                    ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                    ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                     ctx.fillText(part.text, currentX2, textY + 30); // 2行目位置を下に調整
                     
                     // 読み仮名（ルビ）を描画 - 漢字の真上に配置
@@ -166,7 +166,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                         // 正確な中央位置
                         const charCenterX = currentX2 + width/2;
                         
-                        ctx.font = '15px "Hiragino Sans", "Meiryo", sans-serif';
+                        ctx.font = '15px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                         const rubyWidth = ctx.measureText(part.ruby).width;
                         
                         // ルビを漢字の真上、中央揃えで配置
@@ -191,7 +191,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                 const textParts2 = analyzeText('にじいろステージ。思い出がたくさん。');
                 
                 // テキスト位置計算のための準備
-                ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                 
                 // 全体のテキスト幅を計算（文字間隔を含む）- 1行目
                 let totalWidth1 = 0;
@@ -221,7 +221,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                     
                     // 本文テキストを描画
                     ctx.fillStyle = '#000000';
-                    ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                    ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                     ctx.fillText(part.text, currentX1, textY - 30); // 1行目位置を下に調整
                     
                     // 読み仮名（ルビ）を描画 - 漢字の真上に配置
@@ -229,7 +229,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                         // 正確な中央位置
                         const charCenterX = currentX1 + width/2;
                         
-                        ctx.font = '15px "Hiragino Sans", "Meiryo", sans-serif';
+                        ctx.font = '15px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                         const rubyWidth = ctx.measureText(part.ruby).width;
                         
                         // ルビを漢字の真上、中央揃えで配置
@@ -252,7 +252,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                     
                     // 本文テキストを描画
                     ctx.fillStyle = '#000000';
-                    ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                    ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                     ctx.fillText(part.text, currentX2, textY + 30); // 2行目位置を下に調整
                     
                     // 読み仮名（ルビ）を描画 - 漢字の真上に配置
@@ -260,7 +260,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                         // 正確な中央位置
                         const charCenterX = currentX2 + width/2;
                         
-                        ctx.font = '15px "Hiragino Sans", "Meiryo", sans-serif';
+                        ctx.font = '15px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                         const rubyWidth = ctx.measureText(part.ruby).width;
                         
                         // ルビを漢字の真上、中央揃えで配置
@@ -283,7 +283,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                 const textParts = analyzeText(text);
                 
                 // テキスト位置計算のための準備
-                ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                 
                 // 全体のテキスト幅を計算（文字間隔を含む）
                 let totalWidth = 0;
@@ -307,7 +307,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                     
                     // 本文テキストを描画
                     ctx.fillStyle = '#000000';
-                    ctx.font = 'bold 30px "Hiragino Sans", "Meiryo", sans-serif';
+                    ctx.font = 'bold 30px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                     ctx.fillText(part.text, currentX, displayY);
                     
                     // 読み仮名（ルビ）を描画 - 漢字の真上に配置
@@ -315,7 +315,7 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
                         // 正確な中央位置
                         const charCenterX = currentX + width/2;
                         
-                        ctx.font = '15px "Hiragino Sans", "Meiryo", sans-serif';
+                        ctx.font = '15px \"Hiragino Sans\", \"Meiryo\", sans-serif';
                         const rubyWidth = ctx.measureText(part.ruby).width;
                         
                         // ルビを漢字の真上、中央揃えで配置
@@ -337,3 +337,175 @@ function createTextOverlayTexture(imagePath, text, rubyText, yPosition = 0.85) {
         img.src = imagePath;
     });
 }
+
+// テキストを分析して、漢字とルビのマッピングを行う関数
+function analyzeText(text) {
+    // 漢字とルビのマッピング
+    const rubyMap = {
+        // 1ページ目
+        '友': 'とも',
+        '達': 'だち',
+        '笑': 'わら',
+        
+        // 2ページ目
+        '海': 'うみ',
+        '泳': 'およ',
+        '楽': 'たの',
+        '思': 'おも',
+        '出': 'で',
+        
+        // 3ページ目
+        '公': 'こう',
+        '園': 'えん',
+        '遊': 'あそ',
+        '最': 'さい',
+        '高': 'こう',
+        '日': 'ひ',
+        
+        // 4ページ目
+        '化': 'ば',
+        '先': 'せん',
+        '生': 'せい',
+        '怖': 'こわ',
+        '思': 'おも',
+        '出': 'で',
+        '館': 'かん',
+        
+        // 5ページ目
+        '練': 'れん',
+        '習': 'しゅう',
+        '見': 'み',
+        '虹': 'にじ',
+        '色': 'いろ',
+        '舞': 'ぶ',
+        '台': 'たい',
+        '思': 'おも',
+        '出': 'で'
+    };
+    
+    const result = [];
+    let i = 0;
+    
+    while (i < text.length) {
+        const char = text[i];
+        
+        // 漢字かどうかをチェック
+        const isKanji = (char >= '\u4e00' && char <= '\u9faf') || (char >= '\u3400' && char <= '\u4dbf');
+        
+        if (isKanji && rubyMap[char]) {
+            result.push({
+                text: char,
+                isKanji: true,
+                ruby: rubyMap[char],
+                spacing: 3 // 漢字の後の文字間隔を調整
+            });
+        } else {
+            result.push({
+                text: char,
+                isKanji: false,
+                spacing: 0 // 通常の文字には追加の間隔を入れない
+            });
+        }
+        
+        i++;
+    }
+    
+    return result;
+}
+
+// ボタンとイベントリスナーのセットアップ
+function setupButtons() {
+    const prevButton = document.getElementById('prevButton');
+    const nextButton = document.getElementById('nextButton');
+    
+    prevButton.addEventListener('click', () => {
+        book.flipLeft();
+    });
+    
+    nextButton.addEventListener('click', () => {
+        book.flipRight();
+    });
+}
+
+// ページ画像を読み込む関数
+async function loadPages() {
+    // 絵本のテクスチャとして使用する画像パス
+    const coverPath = 'images/cover.jpg';
+    const page1Path = 'images/page1.jpg';
+    const page2Path = 'images/page2.jpg';
+    const page3Path = 'images/page3.jpg';
+    const page4Path = 'images/page4.jpg';
+    const page5Path = 'images/page5.jpg';
+    const backCoverPath = 'images/backcover.jpg';
+    
+    // カバーのテクスチャ作成
+    const coverTexture = await createTextOverlayTexture(coverPath, "", "");
+    
+    // ページ1のテクスチャ作成 - テキストとルビを追加
+    const page1Texture = await createTextOverlayTexture(
+        page1Path, 
+        "友達と笑って過ごした楽しい一日。", 
+        ""
+    );
+    
+    // ページ2のテクスチャ作成
+    const page2Texture = await createTextOverlayTexture(
+        page2Path, 
+        "海で泳いで楽しかった夏の思い出。", 
+        ""
+    );
+    
+    // ページ3のテクスチャ作成
+    const page3Texture = await createTextOverlayTexture(
+        page3Path, 
+        "公園で遊んだ最高の日。", 
+        ""
+    );
+    
+    // ページ4のテクスチャ作成
+    const page4Texture = await createTextOverlayTexture(
+        page4Path, 
+        "お化けになった先生が怖かったけど、いい思い出になったおばけやしき。", 
+        ""
+    );
+    
+    // ページ5のテクスチャ作成
+    const page5Texture = await createTextOverlayTexture(
+        page5Path, 
+        "たくさん練習してパパとママに見てもらったにじいろステージ。思い出がたくさん。", 
+        ""
+    );
+    
+    // 裏表紙のテクスチャ作成
+    const backCoverTexture = await createTextOverlayTexture(backCoverPath, "", "");
+    
+    // ページを絵本に追加
+    book.addPage(coverTexture, coverTexture); // 表紙（両面同じテクスチャ）
+    book.addPage(page1Texture, page2Texture);  // ページ1と2
+    book.addPage(page3Texture, page4Texture);  // ページ3と4
+    book.addPage(page5Texture, backCoverTexture); // ページ5と裏表紙
+}
+
+// ウィンドウのリサイズ処理
+function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+// メインのアニメーションループ
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+// 初期化時に実行する関数
+async function init() {
+    await loadPages();
+    setupButtons();
+    window.addEventListener('resize', onWindowResize, false);
+    animate();
+}
+
+init();
