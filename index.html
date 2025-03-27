@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>思い出絵本 - Three.js</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+    }
+    
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: flex;
+      gap: 20px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    
+    button:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="controls">
+    <button id="prevPage">前のページ</button>
+    <button id="nextPage">次のページ</button>
+  </div>
+  
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
