@@ -35,6 +35,10 @@ directionalLight.position.set(1, 1, 1);
 directionalLight.castShadow = true;
 scene.add(directionalLight);
 
+// 効果音の設定
+const pageFlipSound = new Audio('sounds/page-flip.mp3');
+pageFlipSound.volume = 0.6; // 音量調整 (0.0～1.0)
+
 // 背景の設定 - 部屋のような環境を作成
 const roomGeometry = new THREE.BoxGeometry(20, 15, 20);
 const roomMaterials = [
@@ -61,6 +65,13 @@ const book = new FlipBook({
     flipDuration: 0.8, // ページめくりの時間（秒）
     yBetweenPages: 0.001, // ページ間のスペース
     pageSubdivisions: 20 // ページの分割数（滑らかさに影響）
+});
+
+// ページめくり効果音のためのイベントリスナーを追加
+book.addEventListener('flipstart', () => {
+    // 音声を再生（既に再生中の場合はリセット）
+    pageFlipSound.currentTime = 0;
+    pageFlipSound.play().catch(e => console.log('音声再生エラー:', e));
 });
 
 // 絵本のスケール調整（縦横比を調整）
@@ -413,17 +424,63 @@ function analyzeText(text) {
     return result;
 }
 
+// 効果音のプリロード
+function preloadSounds() {
+    return new Promise((resolve) => {
+        // 効果音が読み込まれたら準備完了
+        pageFlipSound.addEventListener('canplaythrough', function onCanPlay() {
+            pageFlipSound.removeEventListener('canplaythrough', onCanPlay);
+            resolve();
+        });
+        
+        // すでに読み込まれている場合や、エラーの場合も処理を進める
+        pageFlipSound.addEventListener('error', function() {
+            console.warn('効果音の読み込みに失敗しました');
+            resolve();
+        });
+        
+        // 効果音ファイルのプリロード
+        pageFlipSound.load();
+    });
+}
+
 // ボタンとイベントリスナーのセットアップ
 function setupButtons() {
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
+    const prevButton = document.getElementById('prevPage');
+    const nextButton = document.getElementById('nextPage');
     
     prevButton.addEventListener('click', () => {
         book.flipLeft();
+        // ページをめくる時に効果音を再生
+        playPageFlipSound();
     });
     
     nextButton.addEventListener('click', () => {
         book.flipRight();
+        // ページをめくる時に効果音を再生
+        playPageFlipSound();
+    });
+    
+    // 絵本本体をクリックしてもページがめくれるように
+    renderer.domElement.addEventListener('click', (event) => {
+        // クリック位置に基づいてページをめくる方向を決定
+        const halfWidth = window.innerWidth / 2;
+        if (event.clientX < halfWidth) {
+            book.flipLeft();
+        } else {
+            book.flipRight();
+        }
+        // 効果音を再生（すでにflipstartイベントで再生されるためここでは不要）
+    });
+}
+
+// 効果音を再生する関数
+function playPageFlipSound() {
+    // 効果音が再生中の場合はリセット
+    pageFlipSound.currentTime = 0;
+    // 効果音を再生
+    pageFlipSound.play().catch(e => {
+        console.log('効果音の再生エラー:', e);
     });
 }
 
@@ -502,9 +559,15 @@ function animate() {
 
 // 初期化時に実行する関数
 async function init() {
+    // 効果音のプリロード
+    await preloadSounds();
+    // ページの読み込み
     await loadPages();
+    // ボタンのセットアップ
     setupButtons();
+    // イベントリスナーの追加
     window.addEventListener('resize', onWindowResize, false);
+    // アニメーションの開始
     animate();
 }
 
