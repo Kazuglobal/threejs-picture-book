@@ -45,6 +45,14 @@ npm run build
 - back-inside.jpg - 裏表紙の裏
 - back-cover.jpg - 裏表紙
 
+## 効果音について
+
+`/sounds` ディレクトリにある効果音ファイルが使用されます：
+
+- page-flip.mp3 - ページめくり時の効果音
+
+効果音の音量は `main.js` 内で `pageFlipSound.volume = 0.6;` のように調整できます。
+
 ## ルビ表示について
 
 日本語の漢字に対するルビ（読み仮名）は、`analyzeText` 関数で定義されています。新しいテキストを追加する場合は、この関数内にパターンを追加してください。
